@@ -1,7 +1,5 @@
 
 
-from multiprocessing import Value
-
 
 class HTMLNode:
     def __init__(self, tag = None, value = None, children = None, props = None):
@@ -16,6 +14,9 @@ class HTMLNode:
     def props_to_html(self):
         props_string = ""
 
+        if self.props is None:
+                return props_string
+
         for prop in self.props:
             prop_value = self.props[prop]
             props_string += f" {prop}=\"{prop_value}\""
@@ -26,8 +27,8 @@ class HTMLNode:
     
 
 class LeafNode(HTMLNode):
-    def __init__(self, value, tag = None, props = None):
-        super().__init__(value, tag, None, props)
+    def __init__(self, tag, value, props = None):
+        super().__init__(tag, value, None, props)
 
     
     def to_html(self):
@@ -37,3 +38,21 @@ class LeafNode(HTMLNode):
             return self.value
         else:
             return f"<{self.tag}{self.props_to_html()}>{self.value}</{self.tag}>"
+        
+class ParentNode(HTMLNode):
+    def __init__(self, tag, children, props = None):
+        super().__init__(tag, None, children, props)
+
+    def to_html(self):
+        if self.tag == None:
+            raise ValueError("parent node must have a HTML tag")
+        if self.children == None:
+            raise ValueError("parent node must have children")
+        html_string = f"<{self.tag}>"
+        children_list = self.children.copy()
+        children_list = self.children.copy()
+        for child in children_list:
+            #if len(children_list) == 0:
+             #   return html_string + f"</{self.tag}>"
+            html_string += child.to_html()
+        return html_string + f"</{self.tag}>"

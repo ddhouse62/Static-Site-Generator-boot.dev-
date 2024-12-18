@@ -1,6 +1,6 @@
 import unittest
 
-from htmlnode import HTMLNode, LeafNode
+from htmlnode import HTMLNode, LeafNode, ParentNode
 
 class TestHTMLNode(unittest.TestCase):
     def test_prop_to_html(self):
@@ -38,5 +38,13 @@ class TestLeafNode(unittest.TestCase):
         node = LeafNode("a", "value", {"prop": "prop_val"})
         self.assertEqual("Tag: a, Value: value, Children: None, Props: {\'prop\': \'prop_val\'}", repr(node))
 
+
+
+class TestParentNode(unittest.TestCase):
+    def test_to_html_1_child(self):
+        node = ParentNode("p", [LeafNode("a", "Click Here", {"href": "google.com"})])
+        self.assertEqual(node.to_html(), "<p><a href=\"google.com\">Click Here</a></p>")
+
+    
 if __name__ == "__main__":
     unittest.main()
