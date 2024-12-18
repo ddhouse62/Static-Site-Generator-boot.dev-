@@ -1,5 +1,5 @@
 from textnode import TextNode, TextType
-from htmlnode import HTMLNode
+from htmlnode import HTMLNode, LeafNode
 
 def main():
     new_node = TextNode("This is a text node", TextType.BOLD, "https://www.boot.dev")
@@ -7,5 +7,8 @@ def main():
 
     node1 = HTMLNode("tag", "value", ["child1", "child2"], {"prop": "https://boot.dev", "prop2": "https://example.com"})
     print(node1.props_to_html())
+
+    node2 = LeafNode("a", "Click Here", {"href": "https://google.com"})
+    print(node2.to_html())
 
 main()
