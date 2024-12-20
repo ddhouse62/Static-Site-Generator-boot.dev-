@@ -1,8 +1,9 @@
 from textnode import TextNode, TextType
-from htmlnode import HTMLNode, LeafNode, ParentNode
+from htmlnode import HTMLNode, LeafNode, ParentNode, text_node_to_html_node
 
 def main():
     new_node = TextNode("This is a text node", TextType.BOLD, "https://www.boot.dev")
+    
     
 
     node1 = HTMLNode("tag", "value", ["child1", "child2"], {"prop": "https://boot.dev", "prop2": "https://example.com"})
@@ -12,6 +13,9 @@ def main():
     node2.to_html()
     
     parent_node = ParentNode("p", [node2, LeafNode("b", "Click Here"), ParentNode("a", [LeafNode("i", "Value2")])])
-    print(parent_node.to_html())
+    #print(parent_node.to_html())
+
+    print(text_node_to_html_node(new_node).to_html())
+    
 
 main()
