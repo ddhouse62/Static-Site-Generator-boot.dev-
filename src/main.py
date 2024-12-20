@@ -1,8 +1,7 @@
-from textnode import TextNode, TextType
-from htmlnode import HTMLNode, LeafNode, ParentNode, text_node_to_html_node
-
+from textnode import TextNode, TextType, text_node_to_html_node
+from htmlnode import HTMLNode, LeafNode, ParentNode
 def main():
-    new_node = TextNode("This is a text node", TextType.BOLD, "https://www.boot.dev")
+    new_node = TextNode("This is a text node", TextType.LINK, "https://www.boot.dev")
     
     
 
