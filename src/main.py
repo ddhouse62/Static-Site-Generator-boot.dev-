@@ -1,6 +1,8 @@
 from textnode import TextNode, TextType, text_node_to_html_node
 from htmlnode import HTMLNode, LeafNode, ParentNode
+from parse_markdown import *
 def main():
+    '''
     new_node = TextNode("This is a text node", TextType.LINK, "https://www.boot.dev")
     
     
@@ -15,6 +17,8 @@ def main():
     #print(parent_node.to_html())
 
     print(text_node_to_html_node(new_node).to_html())
-    
+    '''
+
+
 
 main()

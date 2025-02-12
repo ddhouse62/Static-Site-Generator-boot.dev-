@@ -1,6 +1,6 @@
 import unittest
 from parse_markdown import (
-    split_nodes_delimiter
+    split_nodes_delimiter, split_nodes_image
 )
 
 from textnode import TextNode, TextType
@@ -85,6 +85,30 @@ class TestInlineMarkdown(unittest.TestCase):
             ],
             new_nodes,
         )
+    
+    def test_image_split(self):
+        test_node = TextNode(
+        "![img1](link1) Middle text ![img2](link2).",
+        TextType.TEXT
+        )
+        test_split_nodes = split_nodes_image([test_node])
+        self.assertListEqual(test_split_nodes, [TextNode("img1", TextType.IMAGE, "link1"), TextNode(" Middle text ", TextType.TEXT), TextNode("img2", TextType.IMAGE, "link2"), TextNode(".", TextType.TEXT)])
+
+    def test_image_split_consecutive(self):
+        node = TextNode(
+        "![img1](link1)![img2](link2)",
+        TextType.TEXT
+        )
+        test_split_nodes = split_nodes_image([node])
+        self.assertListEqual(test_split_nodes, [TextNode("img1", TextType.IMAGE, "link1"), TextNode("img2", TextType.IMAGE, "link2")])
+
+    def test_image_split_end(self):
+        test_node = TextNode(
+        "![img1](link1) Middle text ![img2](link2)",
+        TextType.TEXT
+        )
+        test_split_nodes = split_nodes_image([test_node])
+        self.assertListEqual(test_split_nodes, [TextNode("img1", TextType.IMAGE, "link1"), TextNode(" Middle text ", TextType.TEXT), TextNode("img2", TextType.IMAGE, "link2")])
 
 
 if __name__ == "__main__":
