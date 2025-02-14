@@ -92,7 +92,7 @@ class TestInlineMarkdown(unittest.TestCase):
         TextType.TEXT
         )
         test_split_nodes = split_nodes_image([test_node])
-        self.assertListEqual(test_split_nodes, [TextNode("img1", TextType.IMAGE, "link1"), TextNode(" Middle text ", TextType.TEXT), TextNode("img2", TextType.IMAGE, "link2"), TextNode(".", TextType.TEXT)])
+        self.assertEqual(test_split_nodes, [TextNode("img1", TextType.IMAGE, "link1"), TextNode(" Middle text ", TextType.TEXT), TextNode("img2", TextType.IMAGE, "link2"), TextNode(".", TextType.TEXT)])
 
     def test_image_split_consecutive(self):
         node = TextNode(
@@ -109,6 +109,37 @@ class TestInlineMarkdown(unittest.TestCase):
         )
         test_split_nodes = split_nodes_image([test_node])
         self.assertListEqual(test_split_nodes, [TextNode("img1", TextType.IMAGE, "link1"), TextNode(" Middle text ", TextType.TEXT), TextNode("img2", TextType.IMAGE, "link2")])
+    
+    def test_image_split_trailing_text(self):
+        test_node = TextNode(
+        "![img1](link1) End text ",
+        TextType.TEXT
+        )
+        test_split_nodes = split_nodes_image([test_node])
+        self.assertListEqual(test_split_nodes, [TextNode("img1", TextType.IMAGE, "link1"), TextNode(" End text ", TextType.TEXT)])
+
+    def test_image_split_empty_node(self):
+        old_nodes = []
+        self.assertListEqual(split_nodes_image(old_nodes), [])
+    
+    def test_image_split_no_text_in_textnode(self):
+        test_node = TextNode("", TextType.TEXT)
+        self.assertListEqual(split_nodes_image([test_node]), [])
+    
+    def test_image_split_non_text_old_nodes(self):
+        old_nodes = [
+            TextNode("Some text ![img1](link1)", TextType.TEXT), 
+            TextNode("Don't touch this", TextType.LINK, "http://example.com")
+        ]
+
+        expected_output = [
+            TextNode("Some text ", TextType.TEXT),
+            TextNode("img1", TextType.IMAGE, "link1"),
+            TextNode("Don't touch this", TextType.LINK, "http://example.com")
+        ]
+
+        self.assertListEqual(split_nodes_image(old_nodes), expected_output)
+
 
 
 if __name__ == "__main__":

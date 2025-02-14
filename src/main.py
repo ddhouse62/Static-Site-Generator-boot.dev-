@@ -19,6 +19,14 @@ def main():
     print(text_node_to_html_node(new_node).to_html())
     '''
 
+    test_node = TextNode(
+        "![img1](link1) Middle text ![img2](link2)",
+        TextType.TEXT
+    )
+    test_split_nodes = split_nodes_image([test_node])
+    for node in test_split_nodes:
+        print(node.text)
+
 
 
 main()
