@@ -2,6 +2,7 @@ from textnode import TextNode, TextType, text_node_to_html_node
 from htmlnode import HTMLNode, LeafNode, ParentNode
 from parse_markdown import *
 from text_to_textnode import text_to_textnode
+from markdown_blocks import *
 def main():
     '''
     new_node = TextNode("This is a text node", TextType.LINK, "https://www.boot.dev")
@@ -28,15 +29,16 @@ def main():
     for node in test_split_nodes:
         print(node.text)
     '''
+    
+    sample_markdown = """# This is a heading
 
-    sample_text = "This is **text** with an *italic* word and a `code block` and an ![obi wan image](https://i.imgur.com/fJRm4Vk.jpeg) and a [link](https://boot.dev)"
-    resulting_nodes = text_to_textnode(sample_text)
-    for node in resulting_nodes:
-        if node.text_type == TextType.LINK or node.text_type == TextType.IMAGE:
-            print(f"TextNode(\"{node.text}\", {node.text_type}, \"{node.url}\"),")
-        else:
+This is a paragraph of text. It has some **bold** and *italic* words inside of it.
 
-            print(f"TextNode(\"{node.text}\", {node.text_type}),")
+* This is the first list item in a list block
+* This is a list item
+* This is another list item"""
+
+    print(markdown_to_blocks(sample_markdown))
 
 
 
