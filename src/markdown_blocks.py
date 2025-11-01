@@ -1,4 +1,7 @@
 from enum import Enum
+from htmlnode import HTMLNode
+from text_to_textnode import text_to_textnode
+from textnode import text_node_to_html_node
 # Takes a raw markdown string (representing a full document).
 # returns a list of 'block strings
 
@@ -55,10 +58,24 @@ def markdown_to_html_node(markdown):
     for block in blocks:
         block_type = block_to_block_type(block)
 
-# TODO - Finish HTML To Block Node - Takes a block (text string) and blocktype to return a html node
-def html_block_node(block, block_type):
+        
+
+def text_to_children(text):
+    text_nodes = text_to_textnode(text)
+    children = map(text_node_to_html_node, text_nodes)
+    return list(children)
+
+def block_to_html_node(block, block_type):
     match block_type:
+        case BlockType.PARAGRAPH:
+            children = text_to_children(block)
+            return HTMLNode("p", )
+        
         case BlockType.HEADING:
-            heading = block.split(" ")[0]
-            heading_level = heading.count("#")
+            heading_level = block.split()[0].count('#')
+            children = text_to_children(block)
+
+
+
+
                             
