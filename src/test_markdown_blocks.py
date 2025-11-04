@@ -44,5 +44,3 @@ This is a paragraph of text. It has some **bold** and *italic* words inside of i
             expected_ouput = []
             self.assertListEqual(expected_ouput, markdown_to_blocks(sample_text))
     
-    
-    
