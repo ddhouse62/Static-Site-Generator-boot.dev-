@@ -38,7 +38,15 @@ This is a paragraph of text. It has some **bold** and *italic* words inside of i
 * This is a list item
 * This is another list item"""
 
-    print(markdown_to_blocks(sample_markdown))
+    md = """
+```
+This is text that _should_ remain
+the **same** even with inline stuff
+```
+    """
+
+    print(markdown_to_html_node(md).to_html())
+
 
 
 
