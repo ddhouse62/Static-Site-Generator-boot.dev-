@@ -5,13 +5,13 @@ import sys
 
 from parse_markdown import *
 from markdown_blocks import *
-from website import copy_static, generate_pages_recursive
+from website import generate_pages_recursive, copy_static
 
 dir_path_static = "./static"
 dir_path_public = "./docs"
 dir_path_content = "./content"
 template_path = "./template.html"
-default_basepath = "/docs/"
+default_basepath = "/"
 
 
 def main():

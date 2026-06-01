@@ -19,7 +19,7 @@ def copy_static(source_dir_path, dest_dir_path):
     
 
 def generate_pages_recursive(
-    dir_path_content: str, template_path: str, dest_dir_path: str, basepath
+    dir_path_content: str, template_path: str, dest_dir_path: str, basepath: str
 ) -> None:
     for filename in os.listdir(dir_path_content):
         from_path = os.path.join(dir_path_content, filename)
@@ -31,7 +31,9 @@ def generate_pages_recursive(
             generate_pages_recursive(from_path, template_path, dest_path, basepath)
 
 
-def generate_page(from_path: str, template_path: str, dest_path: str | Path, basepath) -> None:
+def generate_page(
+    from_path: str, template_path: str, dest_path: str | Path, basepath: str
+) -> None:
     print(f" * {from_path} {template_path} -> {dest_path}")
     from_file = open(from_path, "r")
     markdown_content = from_file.read()
@@ -63,6 +65,3 @@ def extract_title(md: str) -> str:
         if line.startswith("# "):
             return line[2:]
     raise ValueError("no title found")
-
-
-
