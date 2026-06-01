@@ -2,8 +2,7 @@ import os
 import shutil
 import sys
 
-from textnode import TextNode, TextType
-from htmlnode import HTMLNode, LeafNode, ParentNode
+
 from parse_markdown import *
 from markdown_blocks import *
 from website import copy_static, generate_pages_recursive
