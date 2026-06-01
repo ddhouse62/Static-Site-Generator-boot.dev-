@@ -2,10 +2,9 @@ import os
 import shutil
 import sys
 
-from textnode import TextNode, TextType, text_node_to_html_node
+from textnode import TextNode, TextType
 from htmlnode import HTMLNode, LeafNode, ParentNode
 from parse_markdown import *
-from text_to_textnode import text_to_textnode
 from markdown_blocks import *
 from website import copy_static, generate_pages_recursive
 
@@ -14,6 +13,7 @@ dir_path_public = "./docs"
 dir_path_content = "./content"
 template_path = "./template.html"
 default_basepath = "/"
+
 
 def main():
     basepath = default_basepath
