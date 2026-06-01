@@ -1,1 +1,1 @@
-python3 src/main.py "https://github.com/ddhouse62/Static-Site-Generator-boot.dev-/docs/"
+python3 src/main.py "/Static-Site-Generator-boot.dev-/"
